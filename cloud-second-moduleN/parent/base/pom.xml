@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.qbg</groupId>
+    <artifactId>base-parent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>base parent</name>
+    <description>base parent,all project parent</description>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.1.12.RELEASE</version>
+        <relativePath/>
+    </parent>
+
+    <properties>
+        <java.version>11</java.version>
+
+        <mysql.jdbc.version>8.0.15</mysql.jdbc.version>
+        <jersey-json.version>1.18</jersey-json.version>
+
+        <!-- spring boot start version -->
+        <spring-boot.version>2.1.12.RELEASE</spring-boot.version>
+
+        <spring-cloud.version>Greenwich.SR5</spring-cloud.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.qbg</groupId>
+                <artifactId>common-artifactid</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.jdbc.version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <repositories>
+        <repository>
+            <id>local_nexus</id>
+            <name>local_nexus</name>
+            <url>http://192.168.57.101:8081/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>config/**</exclude>
+                </excludes>
+                <includes>
+                    <include>static/**</include>
+                    <include>templates/**</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/config</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
+    <profiles>
+        <profile>
+            <!-- 本地开发环境 -->
+            <id>local</id>
+            <properties>
+                <profiles.active>local</profiles.active>
+
+                <eureka.security.username>admin</eureka.security.username>
+                <eureka.security.password>1234</eureka.security.password>
+
+                <eureka.client.service-url.defaultZone>http://admin:1234@127.0.0.1:10000/eureka/</eureka.client.service-url.defaultZone>
+
+                <feign.security.username>feign-user</feign.security.username>
+                <feign.security.password>feign-password</feign.security.password>
+
+                <oauth2.server.ip-address>127.0.0.1:10003</oauth2.server.ip-address>
+
+                <!--***Apom依赖于此pom，以Apom为基础 即此处 pom.basedir是项目根目录-->
+                <config.file.directory>file:/${pom.basedir}/../../config-file</config.file.directory>
+
+                <config.url>http://127.0.0.1:10001/</config.url>
+                <config.security.username>config-user</config.security.username>
+                <config.security.password>config-password</config.security.password>
+
+                <log.file.directory>d:/log/</log.file.directory>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+        <profile>
+            <!-- 生产环境 -->
+            <id>prod</id>
+            <properties>
+                <profiles.active>prod</profiles.active>
+
+                <eureka.security.username>eureka-user</eureka.security.username>
+                <eureka.security.password>eureka-password</eureka.security.password>
+
+                <eureka.client.service-url.defaultZone>http://eureka-user:eureka-password@127.0.0.1:10000/eureka/</eureka.client.service-url.defaultZone>
+
+                <feign.security.username>feign-user</feign.security.username>
+                <feign.security.password>feign-password</feign.security.password>
+
+                <oauth2.server.ip-address>127.0.0.1:10003</oauth2.server.ip-address>
+
+                <config.file.directory>G:/Coding/idea_2019_workspace/duty_product/config-file</config.file.directory>
+
+                <config.url>http://127.0.0.1:10002/base-server-config</config.url>
+                <config.security.username>config-user</config.security.username>
+                <config.security.password>config-password</config.security.password>
+
+                <log.file.directory>/tj/logs/</log.file.directory>
+            </properties>
+        </profile>
+        <profile>
+            <!-- 生产环境 -->
+            <id>docker</id>
+            <properties>
+                <profiles.active>docker</profiles.active>
+
+                <eureka.security.username>eureka-user</eureka.security.username>
+                <eureka.security.password>eureka-password</eureka.security.password>
+
+                <eureka.client.service-url.defaultZone>http://eureka-user:eureka-password@127.0.0.1:10000/eureka/</eureka.client.service-url.defaultZone>
+
+                <feign.security.username>feign-user</feign.security.username>
+                <feign.security.password>feign-password</feign.security.password>
+
+                <oauth2.server.ip-address>127.0.0.1:10003</oauth2.server.ip-address>
+
+                <config.file.directory>G:/Coding/idea_2019_workspace/duty_product/config-file</config.file.directory>
+
+                <config.url>http://127.0.0.1:10002/base-server-config</config.url>
+                <config.security.username>config-user</config.security.username>
+                <config.security.password>config-password</config.security.password>
+
+                <!--docker 日志输出到控制台-->
+                <!--<log.file.directory></log.file.directory>-->
+            </properties>
+        </profile>
+    </profiles>
+</project>

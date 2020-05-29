@@ -1,0 +1,29 @@
+server:
+  port: 10001
+
+spring:
+  application:
+    name: config-app
+
+  profiles:
+    active: native,@profiles.active@   # native表示本地方式
+
+  cloud:
+    config:
+      server:
+        bootstrap : true
+        native:  # 配置文件存放路径
+          search-locations: @config.file.directory@
+
+  security:
+    user:
+      name: @config.security.username@
+      password: @config.security.password@
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: @eureka.client.service-url.defaultZone@
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}

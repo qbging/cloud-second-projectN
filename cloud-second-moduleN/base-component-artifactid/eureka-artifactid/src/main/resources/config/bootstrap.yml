@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: eureka-app
+  profiles:
+    active: @profiles.active@
+  security:
+    user:
+      name: @eureka.security.username@
+      password: @eureka.security.password@
+
+
+eureka:
+#  environment: local
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}
+  client:
+    enabled: true
+    serviceUrl:
+      defaultZone: @eureka.client.service-url.defaultZone@
+    register-with-eureka: false
+    fetch-registry: false
+
+---
+spring:
+  profiles: local
+server:
+  port: 10000
+---
+spring:
+  profiles: prod
+server:
+  port: 10000
+
