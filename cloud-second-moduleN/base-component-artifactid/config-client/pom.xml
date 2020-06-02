@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.qbg</groupId>
+        <artifactId>base-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../../parent/base/pom.xml</relativePath>
+    </parent>
+
+    <groupId>com.qbg</groupId>
+    <artifactId>config-client</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <dependencies>
+        <!--包含spring-cloud-config-client 于是包含了spring-web-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <!--此依赖包含了tomcat，故可以作为web运行；否则以Java应用跑完就结束了-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <!--有了客户端依赖，配置文件中eureka.client.service-url.defaultZone 才会起作用，也可以点进去
+            并且 写 和 不写 @EnableEurekaClient对应的是 config.uri 和 config.discovery.enabled与service-id-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+        <!--监控(配置手动刷新 配置中心 1.依赖，2.配置management...，3.controller添加@RefreshScope，4.post请求“http://clientadress/actuator/refresh”)-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+    </dependencies>
+</project>

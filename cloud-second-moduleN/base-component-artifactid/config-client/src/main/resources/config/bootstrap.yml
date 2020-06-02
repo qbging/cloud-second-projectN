@@ -1,0 +1,42 @@
+server:
+  port: 10003
+
+spring:
+  application:
+    name: config-client-app
+
+  profiles:
+    active: @profiles.active@
+
+# 引用git，使用了注册中心可使用discovery.enabled和service-id
+#  cloud:
+#    config:
+#      profile: @profiles.active@
+#      label: master
+#      name: client
+#      discovery: #启动类可以不加@EnableEurekaClient
+#        enabled: true
+#        service-id: config-git-app
+
+# 引用git 测试通过 可行（没有使用注册中心，使用uri 配置配置中心。如果用了则需要使用@EnableEurekaClient）
+  cloud:
+    config:
+      profile: @profiles.active@
+      uri: @config.url@ #http://127.0.0.1:10001/本地，10002 git
+      label: master
+      name: client
+
+#配置手动刷新 1.依赖，2.配置management.endpoints..，3.controller添加@RefreshScope,4.post请求“http://clientadress/actuator/refresh”
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh
+
+eureka:
+  client:
+    service-url:
+      defaultZone: @eureka.client.service-url.defaultZone@
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}
+

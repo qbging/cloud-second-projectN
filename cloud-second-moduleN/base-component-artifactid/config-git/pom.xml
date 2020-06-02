@@ -11,9 +11,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.qbg</groupId>
-    <artifactId>config-artifact</artifactId>
+    <artifactId>config-git</artifactId>
+
+    <name>config-git-name</name>
 
     <dependencies>
+        <!--此依赖包含了spring-boot-starter-web，于是引入了tomcat，故可以作为web运行；否则以Java应用跑完就结束了-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-config-server</artifactId>
@@ -25,28 +28,5 @@
             <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
     </dependencies>
-
-    <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>false</filtering>
-                <excludes>
-                    <exclude>config/**</exclude>
-                </excludes>
-                <includes>
-                    <include>static/**</include>
-                    <include>templates/**</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources/config</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**</include>
-                </includes>
-            </resource>
-        </resources>
-    </build>
 
 </project>

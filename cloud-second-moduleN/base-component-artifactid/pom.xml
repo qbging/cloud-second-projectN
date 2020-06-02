@@ -17,6 +17,8 @@
         <module>eureka-artifactid</module>
         <module>common-filepath</module>
         <module>config-artifact</module>
+        <module>config-git</module>
+        <module>config-client</module>
     </modules>
 
     <name>base-component-name</name>

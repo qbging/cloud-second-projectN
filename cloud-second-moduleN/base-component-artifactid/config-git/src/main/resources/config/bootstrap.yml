@@ -1,0 +1,29 @@
+server:
+  port: 10002
+
+spring:
+  application:
+    name: config-git-app
+
+  profiles:
+    active: @profiles.active@
+
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/qbging/cloud-second-projectN.git
+          search-paths: cloud-second-moduleN/config-file
+      label: master
+
+  security:
+    user:
+      name: @config.security.username@
+      password: @config.security.password@
+
+eureka:
+  client:
+    service-url:
+      defaultZone: @eureka.client.service-url.defaultZone@
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${server.port}:${spring.application.name}

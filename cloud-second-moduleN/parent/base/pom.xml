@@ -110,8 +110,9 @@
 
                 <oauth2.server.ip-address>127.0.0.1:10003</oauth2.server.ip-address>
 
+                <config.file.directory>D:/IdeaProjects/cloud-second-projectN/cloud-second-moduleN/parent/config-file</config.file.directory>
                 <!--***Apom依赖于此pom，以Apom为基础 即此处 pom.basedir是项目根目录-->
-                <config.file.directory>file:/${pom.basedir}/../../config-file</config.file.directory>
+                <!--<config.file.directory>${pom.basedir}/../../config-file</config.file.directory>-->
 
                 <config.url>http://127.0.0.1:10001/</config.url>
                 <config.security.username>config-user</config.security.username>
