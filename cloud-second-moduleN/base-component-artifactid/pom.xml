@@ -19,6 +19,7 @@
         <module>config-artifact</module>
         <module>config-git</module>
         <module>config-client</module>
+        <module>gateway-artifact</module>
     </modules>
 
     <name>base-component-name</name>

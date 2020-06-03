@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>base-parent</artifactId>
+        <groupId>com.qbg</groupId>
+        <version>1.0-SNAPSHOT</version>
+        <relativePath>../../parent/base/pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.qbg</groupId>
+    <artifactId>gateway-artifact</artifactId>
+
+    <name>gateway-name</name>
+
+    <dependencies>
+        <!--Gateway是使用netty(webflux含有netty)+webflux 实现因此不需要再引入 web 模块。-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-gateway</artifactId>
+        </dependency>
+        <!--有了客户端依赖，配置文件中eureka.client.service-url.defaultZone 才会起作用，也可以点进去-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
+    </dependencies>
+
+</project>

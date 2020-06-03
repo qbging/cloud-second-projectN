@@ -13,7 +13,7 @@ spring:
       server:
         git:
           uri: https://github.com/qbging/cloud-second-projectN.git
-          search-paths: cloud-second-moduleN/config-file
+          search-paths: cloud-second-moduleN/parent/config-file
       label: master
 
   security:
