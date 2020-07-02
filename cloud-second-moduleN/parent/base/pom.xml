@@ -21,7 +21,7 @@
     <properties>
         <java.version>11</java.version>
 
-        <mysql.jdbc.version>8.0.15</mysql.jdbc.version>
+        <mysql.jdbc.version>8.0.16</mysql.jdbc.version>
         <jersey-json.version>1.18</jersey-json.version>
 
         <!-- spring boot start version -->
